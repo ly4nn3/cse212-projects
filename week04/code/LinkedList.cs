@@ -42,6 +42,10 @@ public class LinkedList : IEnumerable<int>
         else
         {
             newNode.Prev = _tail;
+            if (_tail != null)
+            {
+                _tail.Next = newNode;
+            }
             _tail = newNode;
         }
     }
@@ -135,6 +139,7 @@ public class LinkedList : IEnumerable<int>
         {
             if (curr.Data == value)
             {
+                Node? next = curr.Next;
                 if (curr == _head)
                 {
                     RemoveHead();
@@ -149,7 +154,10 @@ public class LinkedList : IEnumerable<int>
                     curr.Prev!.Next = curr.Next;
                     curr.Next!.Prev = curr.Prev;
                 }
+                return;
             }
+
+            curr = curr.Next;
         }
     }
 
